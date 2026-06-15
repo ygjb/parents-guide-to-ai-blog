@@ -147,6 +147,34 @@ a:hover { color: var(--bs-link-hover-color); }
 /* ── Letter-spacing utility ── */
 .ls-wide { letter-spacing: .1em; }
 
+/* ── Site logo banner (index page) ── */
+.site-logo-banner {
+  display: inline-block;
+  padding: 1.5rem 2.5rem;
+  background: #ffffff;
+  border: 2px solid var(--bs-primary);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 18px rgba(47, 93, 98, .18);
+  transition: box-shadow .2s;
+  text-decoration: none;
+}
+.site-logo-banner:hover {
+  box-shadow: 0 6px 24px rgba(47, 93, 98, .28);
+}
+.site-logo-banner img {
+  display: block;
+  max-width: 460px;
+  width: 100%;
+  height: auto;
+}
+[data-bs-theme="dark"] .site-logo-banner {
+  border-color: var(--bs-primary);
+  box-shadow: 0 4px 20px rgba(111, 179, 186, .22);
+}
+[data-bs-theme="dark"] .site-logo-banner:hover {
+  box-shadow: 0 6px 28px rgba(111, 179, 186, .35);
+}
+
 /* ── Series callout (index page) ── */
 .series-callout {
   background-color: var(--navbar-bg);
