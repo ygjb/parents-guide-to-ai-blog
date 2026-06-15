@@ -1,5 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>A Parent's Guide to AI - Try It Yourself</title><link href="https://blog.parentsguidetoai.ca/" rel="alternate"/><link href="https://blog.parentsguidetoai.ca/feeds/try-it-yourself.atom.xml" rel="self"/><id>https://blog.parentsguidetoai.ca/</id><updated>2026-06-14T00:00:00-07:00</updated><entry><title>Part 3 - ChatGPT, Copilot, Gemini, Claude, and Perplexity: A Plain-Language Comparison for Parents</title><link href="https://blog.parentsguidetoai.ca/ai-tools-comparison-for-parents.html" rel="alternate"/><published>2026-06-14T00:00:00-07:00</published><updated>2026-06-14T00:00:00-07:00</updated><author><name>Yvan Boily</name></author><id>tag:blog.parentsguidetoai.ca,2026-06-14:/ai-tools-comparison-for-parents.html</id><summary type="html">&lt;p&gt;A plain-language guide to the five AI tools your children are most likely to encounter — what each one does, who made it, and which one to try first.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;Part 3 of 12 in the Try It Yourself series — practical AI guidance for parents at &lt;a href="https://blog.parentsguidetoai.ca"&gt;blog.parentsguidetoai.ca&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>A Parent's Guide to AI - Try It Yourself</title><link href="https://blog.parentsguidetoai.ca/" rel="alternate"/><link href="https://blog.parentsguidetoai.ca/feeds/try-it-yourself.atom.xml" rel="self"/><id>https://blog.parentsguidetoai.ca/</id><updated>2026-06-15T00:00:00-07:00</updated><entry><title>Part 4 - Your Privacy Checklist: What Never to Share With AI</title><link href="https://blog.parentsguidetoai.ca/privacy-checklist-what-not-to-share-with-ai.html" rel="alternate"/><published>2026-06-15T00:00:00-07:00</published><updated>2026-06-15T00:00:00-07:00</updated><author><name>Yvan Boily</name></author><id>tag:blog.parentsguidetoai.ca,2026-06-15:/privacy-checklist-what-not-to-share-with-ai.html</id><summary type="html">&lt;p&gt;Before you spend much time with AI tools, there's one thing you need to understand: what you type doesn't always stay private. Here's what to know and what to check.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;Part 4 of 12 in the Try It Yourself series — practical AI guidance for parents at &lt;a href="https://blog.parentsguidetoai.ca"&gt;blog.parentsguidetoai.ca&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Before you spend much time with AI tools, there's one thing you need to understand. What you type into an AI tool doesn't always stay private.  The prompts you enter are logged, and held for a period time that could be different for each AI tool.&lt;/p&gt;
+&lt;p&gt;This isn't a reason to avoid AI, after all most internet tools do the same thing. It's a reason to use it thoughtfully — the same way you'd think twice before posting something publicly online. The &lt;a href="https://parentsguidetoai.ca"&gt;parent's guide at parentsguidetoai.ca&lt;/a&gt; gives children a clear rule about what to keep private. That rule applies equally to parents who are trying these tools for the first time.&lt;/p&gt;
+&lt;p&gt;This post covers what not to share, why it matters, and how to check the privacy settings on the tools you're using.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;The rule from the parent's guide — and why it applies to you too&lt;/h2&gt;
+&lt;p&gt;Section 7 of the parent's guide includes a privacy checklist for children. It lists things that should never be entered into an AI tool:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Passwords&lt;/li&gt;
+&lt;li&gt;Home addresses&lt;/li&gt;
+&lt;li&gt;Financial information&lt;/li&gt;
+&lt;li&gt;Health information&lt;/li&gt;
+&lt;li&gt;Student identification numbers&lt;/li&gt;
+&lt;li&gt;Personal information about classmates&lt;/li&gt;
+&lt;li&gt;Family information&lt;/li&gt;
+&lt;li&gt;Private photographs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And it offers a principle worth remembering:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;"Never put anything into an AI tool that you would not want copied, stored, or shared."&lt;/em&gt;
+— &lt;a href="https://parentsguidetoai.ca"&gt;A Parent's Guide to Artificial Intelligence&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This applies to adults just as much as children. If you're trying an AI tool for the first time this week, it's easy to start typing things into it the same way you'd type into a search engine. But a search engine query and an AI conversation are not the same thing.&lt;/p&gt;
+&lt;p&gt;When you search something on Google, Google sees the query. When you type something into ChatGPT or Copilot, that whole conversation — every question, every response — may be retained by the company that runs the tool.&lt;/p&gt;
+&lt;p&gt;It's kind of a silly example, but when I was taking a writing class, one of the assignments was to write an action sequence, and I decided to write one about two police officers working to defuse a bomb while a gang of villains tried to stop them.  Naturally I wanted to look up how to write a somewhat realistic bomb would look and behave like.  ChatGPT was not very enthusiastic about helping me figure that out...&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;How AI tools use your conversations&lt;/h2&gt;
+&lt;p&gt;Different tools handle data differently. But as a general rule, conversations with public AI tools may be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Stored&lt;/strong&gt; by the company for a period of time&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reviewed&lt;/strong&gt; by human staff for safety and quality purposes (this is more common than people realize)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Used to train future AI models&lt;/strong&gt; — unless you opt out&lt;sup id="fnref:1"&gt;&lt;a class="footnote-ref" href="#fn:1"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;That last point is the one that surprises most people. When you try a free AI tool with the default settings turned on, your conversations may become part of the data that makes future versions of the tool smarter. You're not just a user. In some configurations, you're also a contributor.&lt;/p&gt;
+&lt;p&gt;The good news is that most major tools give you the ability to turn this off. And the managed school versions, like VSB's Copilot 13+, include additional protections specifically because students are minors. The parent's guide covers this in Section 2:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;"Student prompts and conversations are not being used to train public AI models"&lt;/em&gt;&lt;sup id="fnref:2"&gt;&lt;a class="footnote-ref" href="#fn:2"&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;That protection applies to the school tool. The home version may have different defaults.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Finding the privacy settings on the three main tools&lt;/h2&gt;
+&lt;p&gt;Here's where to look on each tool you might be using:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ChatGPT (&lt;a href="https://chatgpt.com"&gt;chatgpt.com&lt;/a&gt;):&lt;/strong&gt;
+- Log in and click your profile icon (bottom left)
+- Go to &lt;strong&gt;Settings → Data Controls&lt;/strong&gt;
+- Look for &lt;strong&gt;"Improve the model for everyone"&lt;/strong&gt; — turn this off if you don't want your conversations used for training
+- You can also delete individual conversations or your entire conversation history from this menu&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Microsoft Copilot (&lt;a href="https://copilot.microsoft.com"&gt;copilot.microsoft.com&lt;/a&gt;):&lt;/strong&gt;
+- If you're signed in with a Microsoft account, your data is governed by Microsoft's privacy policy
+- For the school version (Copilot 13+), data protections are set by the school district — not your personal settings
+- Check your Microsoft account privacy settings at &lt;a href="https://account.microsoft.com/privacy"&gt;account.microsoft.com/privacy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Google Gemini (&lt;a href="https://gemini.google.com"&gt;gemini.google.com&lt;/a&gt;):&lt;/strong&gt;
+- Log in and click the three-dot menu or your profile icon
+- Go to &lt;strong&gt;Gemini Apps Activity&lt;/strong&gt; to see and delete stored conversations
+- You can turn off activity saving, which stops conversations from being stored in your account history&lt;/p&gt;
+&lt;p&gt;It takes about two minutes to check each of these. I'd suggest doing it the first time you open the tool.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;A practical approach&lt;/h2&gt;
+&lt;p&gt;The privacy settings matter. But the more reliable protection is habit.&lt;/p&gt;
+&lt;p&gt;Think of AI conversations as semi-public. Not the same as posting on social media, but not as private as a conversation you'd have with your doctor or your bank. With that framing, most everyday AI use is fine, asking questions, getting explanations, working through an idea. The things you'd want to keep private mostly take care of themselves.&lt;/p&gt;
+&lt;p&gt;For children, this is worth making explicit. The parent's guide suggests treating AI conversations like public conversations: a simple, clear standard that's easy for a child to understand and apply.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;The short version:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AI conversations may be stored, reviewed by humans, and used to train future models — check the settings.&lt;/li&gt;
+&lt;li&gt;The rule from the parent's guide applies to everyone: never type anything you wouldn't want copied, stored, or shared.&lt;/li&gt;
+&lt;li&gt;School-managed tools (like VSB's Copilot 13+) have stronger data protections than the home versions.&lt;/li&gt;
+&lt;li&gt;On ChatGPT, Copilot, and Gemini, you can turn off data sharing — it takes about two minutes.&lt;/li&gt;
+&lt;li&gt;The most practical protection is treating AI like a semi-public space.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;With privacy covered, we're ready to move into the hands-on part of the series. The next post is about one of the most important skills any AI user can develop: how to spot mistakes in what AI tells you before your kids don't.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Check your settings:&lt;/strong&gt; Open whichever AI tool you signed up for and find the privacy or data controls. Turn off conversation training if that option exists. Then review &lt;a href="https://parentsguidetoai.ca"&gt;Section 7 of the parent's guide&lt;/a&gt; with your child.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Next up:&lt;/strong&gt; &lt;a href="https://blog.parentsguidetoai.ca/"&gt;Post 5 — How to Spot AI Mistakes Before Your Kids Don't&lt;/a&gt;&lt;/p&gt;
+&lt;!-- LINK: Post 5 — How to Spot AI Mistakes --&gt;
+
+&lt;hr&gt;
+&lt;h4&gt;Notes&lt;/h4&gt;
+&lt;div class="footnote"&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;OpenAI. "How Your Data Is Used to Improve Model Performance." &lt;em&gt;OpenAI Help Center&lt;/em&gt;, 2024. https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance&amp;#160;&lt;a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;Vancouver School Board. "Copilot 13+ in Secondary Schools." &lt;em&gt;Vancouver School Board&lt;/em&gt;, 2026. https://www.vsb.bc.ca/copilot-13-in-secondary-schools&amp;#160;&lt;a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</content><category term="Try It Yourself"/><category term="privacy"/><category term="safety"/><category term="data"/></entry><entry><title>Part 3 - ChatGPT, Copilot, Gemini, Claude, and Perplexity: A Plain-Language Comparison for Parents</title><link href="https://blog.parentsguidetoai.ca/ai-tools-comparison-for-parents.html" rel="alternate"/><published>2026-06-14T00:00:00-07:00</published><updated>2026-06-14T00:00:00-07:00</updated><author><name>Yvan Boily</name></author><id>tag:blog.parentsguidetoai.ca,2026-06-14:/ai-tools-comparison-for-parents.html</id><summary type="html">&lt;p&gt;A plain-language guide to the five AI tools your children are most likely to encounter — what each one does, who made it, and which one to try first.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;em&gt;Part 3 of 12 in the Try It Yourself series — practical AI guidance for parents at &lt;a href="https://blog.parentsguidetoai.ca"&gt;blog.parentsguidetoai.ca&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Once you decide to try AI yourself, the next question is: which one?&lt;/p&gt;
 &lt;p&gt;If you search for "AI tools" right now, you'll find hundreds of options. Most of them you can ignore, at least until you learn more about AI tools and which ones you might want to use, or if you need to learn more about one your children or students ask about. The &lt;a href="https://parentsguidetoai.ca"&gt;parent's guide at parentsguidetoai.ca&lt;/a&gt; names five tools specifically — and those five are the ones your children are most likely to encounter. So let's focus there.&lt;/p&gt;
@@ -119,7 +208,7 @@
 &lt;hr&gt;
 &lt;p&gt;Now that you know which tool to use and why, the next post covers something important before you go further: what you should never type into any of these tools.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Try it today:&lt;/strong&gt; Sign up for a free account on whichever tool you chose. Just creating the account and sending one test message counts. To stretch yourself, try out two or three, and ask each one the exact same questions and observe the difference in how they respond.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Next up:&lt;/strong&gt; &lt;a href="https://blog.parentsguidetoai.ca/"&gt;Post 4 — Your Privacy Checklist: What Never to Share With AI&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Next up:&lt;/strong&gt; &lt;a href="https://blog.parentsguidetoai.ca/privacy-checklist-what-not-to-share-with-ai.html"&gt;Post 4 — Your Privacy Checklist: What Never to Share With AI&lt;/a&gt;&lt;/p&gt;
 &lt;!-- LINK: Post 4 — Your Privacy Checklist --&gt;
 
 &lt;hr&gt;
