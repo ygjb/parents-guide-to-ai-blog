@@ -9,9 +9,10 @@
 
   <script>
     (function(){
-      var s=localStorage.getItem('pgai-theme');
-      var p=window.matchMedia('(prefers-color-scheme:dark)').matches;
-      document.documentElement.setAttribute('data-bs-theme', s||(p?'dark':'light'));
+      if (window.location.hash === '#dark') {
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+      }
+      // else stays 'light' as set on <html data-bs-theme="light">
     })();
   </script>
 
@@ -366,22 +367,37 @@
 
   <script>
     (function () {
-      var html = document.documentElement;
-      var btn  = document.getElementById('theme-toggle');
+      var html  = document.documentElement;
+      var btn   = document.getElementById('theme-toggle');
       var iconD = btn.querySelector('.theme-icon-dark');
       var iconL = btn.querySelector('.theme-icon-light');
 
-      function apply(t) {
-        html.setAttribute('data-bs-theme', t);
-        iconD.style.display = (t === 'dark')  ? 'none' : '';
-        iconL.style.display = (t === 'light') ? 'none' : '';
-        localStorage.setItem('pgai-theme', t);
+      function apply(dark) {
+        html.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
+        iconD.style.display = dark ? 'none' : '';
+        iconL.style.display = dark ? '' : 'none';
       }
 
-      apply(html.getAttribute('data-bs-theme') || 'light');
+      function propagateLinks() {
+        var dark = html.getAttribute('data-bs-theme') === 'dark';
+        document.querySelectorAll('a[href]').forEach(function (a) {
+          var href = a.getAttribute('href');
+          // Target links to the guide site but not to the blog itself
+          if (/^https?:\/\/(?!blog\.)parentsguidetoai\.ca/i.test(href)) {
+            var base = href.split('#')[0];
+            a.setAttribute('href', dark ? base + '#dark' : base);
+          }
+        });
+      }
+
+      apply(html.getAttribute('data-bs-theme') === 'dark');
+      propagateLinks();
 
       btn.addEventListener('click', function () {
-        apply(html.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark');
+        var goingDark = html.getAttribute('data-bs-theme') !== 'dark';
+        apply(goingDark);
+        history.replaceState(null, '', window.location.pathname + window.location.search + (goingDark ? '#dark' : ''));
+        propagateLinks();
       });
     })();
   </script>
