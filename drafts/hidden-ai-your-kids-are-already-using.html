@@ -195,7 +195,53 @@
       </div>    </div>
   </div>  <p class="author-bio-text">Yvan Boily is a technology professional and parent based in Vancouver, BC. He created A Parent's Guide to AI to help families understand and navigate artificial intelligence with confidence — not from theory, but from experience.</p>  <div class="author-bio-social">    <a href="https://parentsguidetoai.ca" target="_blank" rel="noopener">
       <i class="bi bi-globe"></i>Website
-    </a>  </div></div>      </aside>
+    </a>  </div></div>      </aside>      <aside id="comments" class="mt-5">
+<h2 class="h6 text-secondary text-uppercase ls-wide mb-3">Comments</h2>
+<div class="giscus"></div>
+
+<script>
+(function () {
+  // Read whatever theme the anti-flash script already applied
+  var theme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+
+  // Build and inject the Giscus client script
+  var s = document.createElement('script');
+  s.src = 'https://giscus.app/client.js';
+  s.setAttribute('data-repo',               'ygjb/parents-guide-to-ai-blog');
+  s.setAttribute('data-repo-id',            'R_kgDOS6G1XQ');
+  s.setAttribute('data-category',           'Announcements');
+  s.setAttribute('data-category-id',        'DIC_kwDOS6G1Xc4C_J4G');
+  s.setAttribute('data-mapping',            'title');
+  s.setAttribute('data-strict',             '1');
+  s.setAttribute('data-reactions-enabled',  '1');
+  s.setAttribute('data-emit-metadata',      '0');
+  s.setAttribute('data-input-position',     'top');
+  s.setAttribute('data-theme',              theme);
+  s.setAttribute('data-lang',              'en');
+  s.setAttribute('data-loading',           'lazy');
+  s.setAttribute('crossorigin',            'anonymous');
+  s.async = true;
+  document.body.appendChild(s);
+
+  // Keep Giscus in sync when the user clicks the dark/light toggle
+  var toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      // Wait a tick for base.html's apply() to update data-bs-theme first
+      setTimeout(function () {
+        var newTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+        var frame = document.querySelector('iframe.giscus-frame');
+        if (frame) {
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: newTheme } } },
+            'https://giscus.app'
+          );
+        }
+      }, 50);
+    });
+  }
+})();
+</script>      </aside>
       <nav class="article-nav" aria-label="Article navigation">      </nav>
 
       <div class="mt-4">
