@@ -281,10 +281,12 @@
         var dark = html.getAttribute('data-bs-theme') === 'dark';
         document.querySelectorAll('a[href]').forEach(function (a) {
           var href = a.getAttribute('href');
-          // Target links to the guide site but not to the blog itself
-          if (/^https?:\/\/(?!blog\.)parentsguidetoai\.ca/i.test(href)) {
+          // Absolute links to either domain, or root-relative links (local dev with SITEURL="")
+          if (/^https?:\/\/(blog\.)?parentsguidetoai\.ca/i.test(href) || /^\/(?!\/)/.test(href)) {
             var base = href.split('#')[0];
-            a.setAttribute('href', dark ? base + '#dark' : base);
+            if (base) { // skip pure in-page anchors like href="#section"
+              a.setAttribute('href', dark ? base + '#dark' : base);
+            }
           }
         });
       }

@@ -114,7 +114,7 @@
       <div class="article-body">
         <p><em>Part 1 of 12 in the Try It Yourself series — practical AI guidance for parents at <a href="https://blog.parentsguidetoai.ca">blog.parentsguidetoai.ca</a></em></p>
 <hr>
-<p>My very first experience with parenting and AI came from a day my daughter spent at <a href="https://ethoslab.ca/about-us/">Ethọ́s Lab</a>.  My daughter is very artistic, and routinely makes some absolutely fantastic art (I have a bias, but also she is actually really talented :D)  That day she brought home an extremely complex piece of art that was obviously created digitally, but it was completely unlike anything she had ever made before.  I already had a great deal of experience with Midjourney and Stable Diffusion, and almost immediately recognized that it was AI generated.  She was insistent that she had created it herself and came up with the idea for it, but it took a while to get her to explain the tools she had used.  She also got very frustrated because she had worked with the tool she used to get the result over multiple iterations.  Back in early 2022, I was also a bit of an AI skeptic (and still remain adamantly attached to the idea that AI art isn't art because art requires human expression and intention).  This conversation was the first time I had to think about how the the technology I was learning about AI and working with at work was going to impact parenting, and I was poorly prepared.</p>
+<p>My very first experience with parenting and AI came from a day my daughter spent at <a href="https://ethoslab.ca/about-us/">Ethọ́s Lab</a>.  My daughter is very artistic, and routinely makes some absolutely fantastic art (I have a bias, but also she is actually really talented :D)  That day she brought home an extremely complex piece of art that was obviously created digitally, but it was completely unlike anything she had ever made before.  I already had a great deal of experience with Midjourney and Stable Diffusion, and almost immediately recognized that it was AI generated.  She was insistent that she had created it herself and came up with the idea for it, but it took a while to get her to explain the tools she had used.  She also got very frustrated because she had worked with the tool she used to get the result over multiple iterations.  Back in early 2023, I was also a bit of an AI skeptic (and still remain adamantly attached to the idea that AI art isn't art because art requires human expression and intention).  This conversation was the first time I had to think about how the the technology I was learning about AI and working with at work was going to impact parenting, and I was poorly prepared.</p>
 <p>That's a moment most parents hit at some point, if you haven't already. Your kid mentions an AI tool you've never heard of. They ask you to explain what AI is. They give you a look. And you realize you're the least informed person in the conversation.</p>
 <p>That moment is fixable, and it's really only takes a few minutes and some free tools.</p>
 <p>I'm not suggesting you become an expert. You don't need to be. But there's a real difference between reading about AI and actually using it. This whole series is built on that idea: the best way to guide your children through the AI era is to try these tools yourself first.</p>
@@ -301,10 +301,12 @@
         var dark = html.getAttribute('data-bs-theme') === 'dark';
         document.querySelectorAll('a[href]').forEach(function (a) {
           var href = a.getAttribute('href');
-          // Target links to the guide site but not to the blog itself
-          if (/^https?:\/\/(?!blog\.)parentsguidetoai\.ca/i.test(href)) {
+          // Absolute links to either domain, or root-relative links (local dev with SITEURL="")
+          if (/^https?:\/\/(blog\.)?parentsguidetoai\.ca/i.test(href) || /^\/(?!\/)/.test(href)) {
             var base = href.split('#')[0];
-            a.setAttribute('href', dark ? base + '#dark' : base);
+            if (base) { // skip pure in-page anchors like href="#section"
+              a.setAttribute('href', dark ? base + '#dark' : base);
+            }
           }
         });
       }
