@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Pelican">
+  <link rel="icon" type="image/png" href="https://blog.parentsguidetoai.ca/favicon.png">
+  <link rel="apple-touch-icon" href="https://blog.parentsguidetoai.ca/favicon.png">
+
+  <script>
+    (function(){
+      if (window.location.hash === '#dark') {
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+      }
+      // else stays 'light' as set on <html data-bs-theme="light">
+    })();
+  </script>
+
+  <title>I Asked Claude to Build a Real Tool in an Afternoon — Here's Exactly How, Including What Went Wrong — A Parent's Guide to AI</title>
+  <meta name="title" property="og:title" content="I Asked Claude to Build a Real Tool in an Afternoon — Here's Exactly How, Including What Went Wrong — A Parent's Guide to AI">
+  <meta name="description" property="og:description" content="You keep hearing that "AI can build software now." That's true, and it's also more complicated than the headline. So I asked Claude to build a real,...">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://blog.parentsguidetoai.ca/building-a-tool-with-claude-blurscan.html">
+  <meta property="og:site_name" content="A Parent's Guide to AI">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="blog.parentsguidetoai.ca">
+  <meta property="twitter:url" content="https://blog.parentsguidetoai.ca/building-a-tool-with-claude-blurscan.html">
+  <meta name="twitter:title" content="I Asked Claude to Build a Real Tool in an Afternoon — Here's Exactly How, Including What Went Wrong — A Parent's Guide to AI">
+  <meta name="twitter:description" content="You keep hearing that "AI can build software now." That's true, and it's also more complicated than the headline. So I asked Claude to build a real,...">
+<meta name="image" property="og:image" content="https://blog.parentsguidetoai.ca/images/social/building-a-tool-with-claude-blurscan.png">
+<meta name="twitter:image" content="https://blog.parentsguidetoai.ca/images/social/building-a-tool-with-claude-blurscan.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link href="https://blog.parentsguidetoai.ca/theme/css/style.css" rel="stylesheet">  <link href="https://blog.parentsguidetoai.ca/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="A Parent's Guide to AI Atom Feed">  <link href="https://blog.parentsguidetoai.ca/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="A Parent's Guide to AI RSS Feed">
+</head>
+
+<body>
+  <a class="visually-hidden-focusable" href="#main-content">Skip to main content</a>
+
+  <nav class="navbar navbar-expand-lg sticky-top" id="site-nav" aria-label="Site navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="https://blog.parentsguidetoai.ca/">
+        <i class="bi bi-robot fs-5"></i>
+        <span>A Parent's Guide to AI</span>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navMain"
+              aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navMain">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">            <li class="nav-item">
+              <a class="nav-link"
+                 href="https://blog.parentsguidetoai.ca/category/general.html">General</a>
+            </li>            <li class="nav-item">
+              <a class="nav-link active"
+                 href="https://blog.parentsguidetoai.ca/category/realworld-ai.html">Realworld AI</a>
+            </li>            <li class="nav-item">
+              <a class="nav-link"
+                 href="https://blog.parentsguidetoai.ca/category/try-it-yourself.html">Try It Yourself</a>
+            </li>          <li class="nav-item">
+            <a class="nav-link" href="/categories.html">Categories</a>
+          </li>          <li class="nav-item">
+            <a class="nav-link" href="/archives.html">Archives</a>
+          </li>          <li class="nav-item">
+            <a class="nav-link" href="/pages/try-it-yourself-resources.html">Resources</a>
+          </li>          <li class="nav-item">
+            <a class="nav-link" href="/pages/publishing-plan.html">Publishing Plan</a>
+          </li>          <li class="nav-item">
+            <a class="nav-link" href="/pages/how-to-comment.html">Comments & Feedback</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm btn-outline-primary"
+               href="https://parentsguidetoai.ca"
+               target="_blank" rel="noopener">
+              <i class="bi bi-book me-1"></i>The Guide
+            </a>
+          </li>
+
+          <li class="nav-item ms-lg-1">
+            <button class="btn btn-sm btn-outline-secondary px-2"
+                    id="theme-toggle" aria-label="Toggle colour scheme">
+              <i class="bi bi-moon-stars theme-icon-dark"></i>
+              <i class="bi bi-sun theme-icon-light" style="display:none"></i>
+            </button>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<main id="main-content" class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-xl-8">
+
+      <header class="article-header">
+<div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+  <time class="eyebrow" datetime="2026-06-30T00:00:00-07:00">Tue 30 June 2026</time>
+  <span class="vr opacity-25"></span>
+  <a class="topic-badge" href="https://blog.parentsguidetoai.ca/category/realworld-ai.html">Realworld AI</a>
+</div>        <h1 class="fw-bold">I Asked Claude to Build a Real Tool in an Afternoon — Here's Exactly How, Including What Went Wrong</h1>
+        <p class="article-byline">
+          <i class="bi bi-person-circle me-1"></i>By
+          <a href="https://blog.parentsguidetoai.ca/author/yvan-boily.html">Yvan Boily</a>
+        </p>        <p class="article-tags">
+          <span class="article-tags-label">Tags:</span>          <a class="topic-badge" href="https://blog.parentsguidetoai.ca/tag/hands-on.html">hands-on</a>          <a class="topic-badge" href="https://blog.parentsguidetoai.ca/tag/building-with-ai.html">building with AI</a>          <a class="topic-badge" href="https://blog.parentsguidetoai.ca/tag/claude.html">claude</a>          <a class="topic-badge" href="https://blog.parentsguidetoai.ca/tag/agents.html">agents</a>          <a class="topic-badge" href="https://blog.parentsguidetoai.ca/tag/what-ai-actually-does.html">what AI actually does</a>          <a class="topic-badge" href="https://blog.parentsguidetoai.ca/tag/behind-the-scenes.html">behind the scenes</a>        </p>      </header>
+
+      <div class="article-body">
+        <hr>
+<p>One of the questions I get most often from parents, friends, and colleagues is some version of: <em>"Is it true that AI can just write software now?"</em> Usually it comes up because a kid has used an AI tool to build a game, or because a headline promised that programmers are obsolete, or because someone at work mentioned "vibe coding" and it sounded like either magic or nonsense.</p>
+<p>The honest answer is: yes, mostly, with asterisks — and the asterisks are the interesting part.</p>
+<p>This particular tool exists because of a conversation. Yesterday I was working with a friend on some job hunting and career growth guidance — how to use AI to help with that, which is its own post coming soon — and somewhere in the middle of it he asked, half offhand, how hard it would be to write a tool that could find and sort the blurry photos out of his personal collection. In the spirit of showing instead of telling, I decided to illustrate exactly how easy it is. So I pointed <a href="https://claude.ai">Claude</a> at the problem and had it build the whole thing, kept the receipts, and turned it into this post.</p>
+<p>I want to be precise about that, because it's the whole point: <strong>I didn't write this program. Claude did.</strong> The design, the code, the tests, even the script that gathered the test images — all of it was written by the machine. My job was to ask for it, make the decisions only a human can make, and check the work. That fits the thing I keep telling you to do in this series: I tried it myself, in the open, and wrote down what actually happened. I kept every prompt I typed. I let Claude run a build loop largely on its own. And when it was done, I asked it to analyze its own build — how many prompts, how many tokens, what it cost, and what we'd both do differently next time.</p>
+<p>This post is the whole story, start to finish. It's more technical than most of what I write here, but you don't need to be a programmer to follow it. The point isn't the code. The point is to show you what "AI builds software" really looks like when you watch the whole thing instead of just the demo — including the part where it spent eight hours overnight doing absolutely nothing and didn't notice.</p>
+<p>As always: this is a volunteer effort, I have no stake in any of the tools mentioned, and there are no referral links here. I work with these technologies professionally, which is exactly why I want to show you the unglamorous parts.</p>
+<hr>
+<h2>What Claude built</h2>
+<p>The tool is called <strong>blurscan</strong>. It does something genuinely useful and genuinely boring: it scans a folder of photos, scores how sharp each one is, and flags the blurry ones — without flagging the <em>intentionally</em> blurry ones, like a portrait with a soft, out-of-focus background. Then it can write a report, copy the blurry shots aside, tag them so a program like Lightroom or Apple Photos can filter them out, or let you flip through them in a little web page in your browser and decide one by one.</p>
+<p>To be clear, I'm not the photographer here — my friend is. He has thousands of photos, a lot of them motorsport shots where he's panning the camera to track a moving car. Sorting the keepers from the genuinely-out-of-focus ones by hand is miserable. That's a real problem <em>he</em> actually has, which is exactly why it made a good test: not a toy, not a tutorial example, but a thing someone would actually use. The photos I tested against came from his collection and, later, from a corpus we built — I don't own a single one of them.</p>
+<p>The whole tool is <a href="https://github.com/ygjb/blurscan">on GitHub</a> and it's open source. But the tool isn't really what I want to show you. <strong>How it got built is.</strong></p>
+<p>A quick word on the setup, because people always ask what you need to do this. The whole thing happened inside <a href="https://code.visualstudio.com">Visual Studio Code</a> — a free code editor from Microsoft — with <a href="https://claude.com/claude-code">Claude Code</a> running as a plugin in it. That plugin is what lets Claude actually create files, run commands, and make changes, rather than just describe them in a chat window; I steered, and Claude did the work, and neither of us left the editor. My particular machine is a Windows laptop, and I happened to be running everything through WSL (a way of running Linux inside Windows), but that's just my habit, not a requirement. The exact same build would have worked just as well on plain Windows with no Linux at all, on a Mac, or on a Linux machine. None of what follows depends on my setup. If you've got a computer and a Claude account, you've got everything you need.</p>
+<hr>
+<h2>The one idea that makes this work: design first, then let it build</h2>
+<p>Here's the mental model that made the whole thing go smoothly, and it's the same advice I gave parents back in <a href="https://blog.parentsguidetoai.ca">Post 1 of this series</a> when I suggested asking an AI to <em>interview you</em> before it helps with a task:</p>
+<blockquote>
+<p><em>Don't ask the AI to build the thing. Ask it to help you decide what the thing should be — then write that down — then let it build from the written plan.</em></p>
+</blockquote>
+<p>Most people's instinct is to type "build me a photo blur detector" and hope. That works for a five-minute toy. It falls apart on anything real, because the AI has to guess at a hundred decisions you never made, and it'll guess wrong on the ones that matter.</p>
+<p>The approach that actually works has a shape to it:</p>
+<ol>
+<li><strong>One sentence, plus "ask me questions."</strong></li>
+<li><strong>Turn the answers into a written design document.</strong></li>
+<li><strong>Break the design into small, numbered tasks.</strong></li>
+<li><strong>Let the AI build the tasks one at a time, with checks it can't skip.</strong></li>
+<li><strong>Stay the human in the loop for the decisions that change what gets built.</strong></li>
+</ol>
+<p>The entire project came out of <strong>18 prompts I typed</strong> and <strong>7 moments where Claude stopped and asked me to choose between options.</strong> That's it. Nine of those prompts happened in the first eighty minutes; the rest of the day was mostly the machine working. Let me walk you through them, because the prompts <em>are</em> the tutorial.</p>
+<hr>
+<h2>Phase 1 — Start with a sentence and ask to be interviewed</h2>
+<p>Here's the literal first thing I typed, typos and all:</p>
+<blockquote>
+<p><em>I want to create a program that will analyze a photo collection to identify images that are blurry. Help me define what features this program should have and how to write it. I would prefer the program to be written in Python or Typescript based on which platform has better tools. Ask me questions to refine the design.</em></p>
+</blockquote>
+<p>That last line is the whole trick. Instead of building immediately, Claude came back with four questions, each with a menu of options:</p>
+<ul>
+<li><strong>What should happen to the blurry images?</strong> Report them? Move them? Tag them? Review them in an app? — <em>I answered: all of those, depending on which option I pass when I run it.</em></li>
+<li><strong>How big is the collection?</strong> — <em>Under 5,000 photos.</em></li>
+<li><strong>Should it avoid flagging artistic blur, like soft-focus portraits?</strong> — <em>Yes, definitely.</em></li>
+<li><strong>Which photo formats?</strong> Ordinary JPEGs? iPhone HEIC? Camera RAW files? — <em>All three.</em></li>
+</ul>
+<p>Notice that I didn't pick from the menu on the first question — I typed my own answer ("all of these, depending on flags"). That freeform answer is the single reason the finished tool can do four different things instead of one. <strong>The menu is a starting point, not a cage.</strong> Some of the best decisions in this whole build were me ignoring the options offered and saying something more ambitious.</p>
+<p>I followed up with the parts of the design that mattered to me:</p>
+<blockquote>
+<p><em>for 1 no, spawn a webserver available locally, and write the features to do it. 2. exiftool. write a design document and provide an estimation of how long this would take for a human, and how long it should take claude.</em></p>
+</blockquote>
+<p>That one short message did three big things. It chose a <em>local</em> web page for the review tool — meaning <strong>the photos being scanned never leave the computer they're on</strong>, which matters to me and should matter to you. It picked the specific, well-respected tool ("exiftool") for the tagging. And it asked for a written design with time estimates.</p>
+<hr>
+<h2>Phase 2 — Make it write the plan down</h2>
+<p>This is the step most people skip when they're starting out with these tools, and it's the most important one. It's the single biggest difference between two very different ways of working with an AI — what people have started calling "vibe coding" versus "spec coding."</p>
+<p><strong>Vibe coding</strong> is the seat-of-the-pants approach: you type "build me a photo blur detector," see what comes out, then keep nudging it — "no, not like that," "add this," "now it's broken, fix it" — riffing your way toward something that more or less works. It's fast and genuinely fun, and it's fine for a quick experiment. But there's no written plan anywhere, so the AI is constantly guessing at decisions you never actually made, you can't tell whether what it built is what you wanted, and on anything non-trivial it tends to wander, contradict its earlier choices, and quietly paint itself into corners.</p>
+<p><strong>Spec coding</strong> (short for "specification") is what I did here: before any real code gets written, you make the AI produce a clear, written description of <em>what</em> is being built and <em>why</em> — the spec — and then everything that follows is measured against that document. It's a little slower to get going, but the plan becomes the thing you and the AI both point back to. When something drifts, you can see it. When you change your mind, the change is deliberate instead of accidental.</p>
+<p>So, the spec:</p>
+<p>Claude produced a <code>DESIGN.md</code> — a full design document. What the tool is for and, just as importantly, what it <em>won't</em> do. How it'll detect blur. How the code is organized. What the little web review page looks like. How it'll be tested. And, because I asked, an honest estimate of how long the whole thing would take.</p>
+<p>That estimate is worth quoting, because it's the heart of why any of this matters:</p>
+<ul>
+<li><strong>A competent human programmer</strong> familiar with these tools: roughly <strong>6 to 8.5 working days</strong> — call it a week and a half to two weeks on the calendar.</li>
+<li><strong>Claude, with me reviewing and steering</strong>: roughly <strong>2.5 to 3.5 hours</strong> of hands-on building.</li>
+</ul>
+<p>Hold onto those numbers. We'll check them against reality at the end, and the result surprised even me.</p>
+<p>Writing the plan down first does something subtle but huge: it turns a vague idea into a contract. Every later step points back to a specific section of that document. When the AI builds something, I can check it against the plan instead of against my fuzzy memory of what I wanted. And when I changed my mind midway (I did, twice, and it mattered), the change had a clear before-and-after.</p>
+<hr>
+<h2>Phase 3 — Give it somewhere to put the work</h2>
+<blockquote>
+<p><em>ok, use gh to create a new public repo for this project. include all design artefacts.</em></p>
+</blockquote>
+<p>One sentence, and Claude created a public code repository on GitHub and committed the design document into it. From here on, every change is tracked, dated, and reversible. This is the software equivalent of the advice I gave in <a href="https://blog.parentsguidetoai.ca">the post about building a provincial guide</a>: <em>date everything, publish openly, make it possible to see the history.</em> It's the same discipline whether you're writing a parents' guide or a photo tool.</p>
+<hr>
+<h2>Phase 4 — Design the assembly line, not just the product</h2>
+<p>This is where it gets genuinely clever, and where the "AI builds software on its own" idea actually lives.</p>
+<blockquote>
+<p><em>set up a build loop to create issues and track the development. only ask me for permission for security related items. create all the issues first. ask me questions to clarify how the loop should work.</em></p>
+</blockquote>
+<p>A "build loop" is just an assembly line. Instead of me sitting there feeding Claude one instruction at a time, I had it write out the entire to-do list as numbered tasks (in software, these are called "issues"), and then work through them one by one on its own. My job shrank to: design the line, set the rules, and watch.</p>
+<p>But before it built anything, it stopped and asked me how the assembly line should run:</p>
+<ul>
+<li><strong>How big should each task be?</strong> — Small and specific (about 15–20 of them), rather than a handful of giant ones.</li>
+<li><strong>How should each finished task be delivered?</strong> — As a reviewable change that <strong>automatically gets merged in only if it passes all the automated tests</strong>.</li>
+<li><strong>What's the pace?</strong> — Continuous: finish one, immediately start the next, no waiting for me.</li>
+<li><strong>What does "done" mean?</strong> — All four of: tests pass, code is clean, it actually runs, and Claude writes a short note reviewing its own work.</li>
+</ul>
+<p>Then a second round of questions about the details:</p>
+<ul>
+<li><strong>How do we define "passes the tests"?</strong> — Set up a real automated checking system (CI) and require it. <strong>No change lands unless a robot has verified it first.</strong></li>
+<li><strong>Who starts the loop?</strong> — Set it all up, but let me press go.</li>
+<li><strong>What about security-sensitive tasks?</strong> — Skip them for now and circle back, so a single sensitive item doesn't stall the whole line.</li>
+</ul>
+<p>I want to underline that last category. <strong>The most valuable thing I did in this entire build was set up rules that the AI could not talk its way past.</strong> "Automatically merge, but <em>only</em> if an independent automated check passes" means "auto-merge if it works" has teeth. The AI doesn't get to decide its own work is good. A separate, dumb, reliable robot does. If you take one idea from this post into your own experiments, make it that one: <strong>gate the AI's output on a check it doesn't control.</strong></p>
+<hr>
+<h2>Phase 5 — Give it a way to know it's right</h2>
+<blockquote>
+<p><em>ok, when building unit tests, use the test_samples diectory, images in blurry are blurry, images in not_blurry are not blurry.</em></p>
+</blockquote>
+<p>The example photos weren't even mine. They were my friend's — a folder from his own collection that he'd helped sort into "blurry" and "not blurry," since this whole thing started with <em>his</em> messy photo library. That gave the automated checks something concrete to do: run the detector against photos with known answers and confirm it scores the blurry ones lower than the sharp ones. This is the difference between an AI that <em>claims</em> its code works and one that can <em>prove</em> it on real examples.</p>
+<p>There was a wrinkle here, and it's a nice illustration of the human-in-the-loop part — and of taking other people's content seriously even on a throwaway project. Those starter photos were deliberately kept <em>out</em> of the public repository. They were my friend's pictures, this was only ever meant as a quick demonstration, and neither of us wanted to publish his personal photos — or get tangled up in questions about copyright — without him taking the time to actually review what was going public. So they stayed on my machine. But that created a problem Claude spotted on its own: the automated checker runs on a clean machine in the cloud, and that machine wouldn't <em>have</em> the photos to test against. Claude flagged it and asked how to handle it. Our first answer was to have it generate synthetic test images on the fly in the cloud. Then the initial real-photo tests started failing in interesting ways (the motion-blur problem, below), and we pivoted again — to having Claude build a proper, openly-licensed test corpus we actually <em>could</em> ship. Plans change. Because the design was written down, the change stayed legible instead of turning chaotic.</p>
+<hr>
+<h2>Phase 6 — Press go, then get out of the way</h2>
+<blockquote>
+<p><em>kick off the loop.</em></p>
+</blockquote>
+<p>Four words. And then, for the most part, I watched.</p>
+<p>Over the next hour and a half, Claude worked through the task list more or less by itself: the photo loader, the blur-detection math, the classifier that sorts sharp from blurry, the reporting, the command-line interface, support for iPhone and RAW photo formats. Each one became a small, tested, reviewed change that merged itself in once the robot confirmed it passed. Eleven tasks done in about ninety minutes.</p>
+<p>It wasn't fully hands-off, and the moment it <em>wasn't</em> is the best part of the whole story.</p>
+<h3>The pivot: when the plan met real photos</h3>
+<p>Partway through, Claude hit exactly the wall I suspected it would. The original plan used one mathematical trick to measure sharpness. It works great for ordinary out-of-focus blur. It fell apart on my friend's motorsport panning shots — because a car the photographer has tracked sharply against a motion-streaked background still has crisp edges on the car, so the math scores some genuinely-blurry frames as <em>sharper</em> than good ones.</p>
+<p>Claude noticed the test results didn't separate cleanly, stopped, and surfaced the problem to me as a decision with four options: reframe the tool as a "rank worst-to-best and let a human skim" helper, add a smarter motion-aware detector, add a machine-learning detector, or just narrow the scope and ship less.</p>
+<p>I typed:</p>
+<blockquote>
+<p><em>add the first three as options, each with its own flag.</em></p>
+</blockquote>
+<p>That one sentence reshaped the project. Instead of one blur detector, the finished tool has <strong>three</strong>, each chosen with a different option when you run it — a fast general one, a motion-aware one for panning shots like my friend's, and a learned one that's the most accurate overall. It spawned two brand-new tasks that weren't in the original plan. This is the human-in-the-loop part doing real work: the AI is great at noticing "this isn't separating cleanly" and laying out the options, but <strong>the choice of which direction to take the tool was mine, and it was the most consequential decision in the build.</strong></p>
+<h3>The side quest: building a test corpus (and doing it without stealing photos)</h3>
+<p>While the main loop ran, I opened a second window and had Claude tackle a related problem in parallel: the tool needed a proper set of test photos.</p>
+<p>A quick definition, because the word matters and I'll use it again: a <strong>corpus</strong> is just a labeled collection of examples you use to check whether a tool actually works. In this case, a pile of photos already sorted into "blurry" and "not blurry," so that every time the detector scores an image, you can compare its answer against the known-correct label. My friend's hand-sorted photos were the first version of this, but they were <em>his</em> — too personal, and too few, to ship publicly with the tool. We needed a bigger, shareable set — and that immediately raised a question I care about a lot: <strong>you can't just scrape a couple hundred strangers' photos off the internet and bundle them into your project.</strong> That's someone else's work.</p>
+<p>So here's what I actually asked for:</p>
+<blockquote>
+<p><em>i want to build a corpus of blurry/non-blurry images. search the web to find 100 blurry samples, and 100 non-blurry samples that are licensed under Creative Commons or other appropriate licenses.</em></p>
+</blockquote>
+<p>Claude didn't just go download images by hand. It <em>wrote a small program</em> — a script — to assemble the corpus properly and reproducibly. That script searches <a href="https://openverse.org"><strong>Openverse</strong></a>, which is a search engine that only indexes images that are openly licensed or in the public domain — Creative Commons photos and similar, pulled from sources like Wikimedia Commons and Flickr's openly-licensed pools. (I chose Openverse specifically because it doesn't require paying for or registering an API key, so anyone can re-run the script.)</p>
+<p>The part that makes this <em>respect</em> copyright instead of just quietly ignoring it: for every single image the script pulls down, it records where it came from, who made it, and the exact license it's under — into a manifest file and a human-readable <code>ATTRIBUTION.md</code>. Creative Commons licenses generally let you use and redistribute a photo <em>as long as you credit the creator and honor the license terms</em>. By keeping that record for every image, the corpus actually meets those terms instead of hand-waving past them. Nothing in there is used without a license that permits it, and the credit each license requires travels with the photo. If a creator ever wanted to check, the paper trail is right there in the repository.</p>
+<p>And — at my insistence — the script flagged the images for me to eyeball before the labels were trusted:</p>
+<blockquote>
+<p><em>verify each image, and also get me to do a manual review when they are done.</em></p>
+</blockquote>
+<p>That "get me to do a manual review" is me not fully trusting the automation, on purpose. Claude is good at gathering, sorting, and bookkeeping the licenses; I'm the one who actually knows a blurry photo when I see one. Keep that division of labor.</p>
+<h3>The night it did nothing</h3>
+<p>Here's the part I most want you to see, because it's the part the breathless headlines never show you.</p>
+<p>I told Claude to keep working overnight:</p>
+<blockquote>
+<p><em>I approve for the security gates; don't let them stop you. I want this loop to run through the night, we can do a security push after the work is done.</em></p>
+</blockquote>
+<h4>A warning before you copy that prompt</h4>
+<p>I need to stop and flag that line in bright red, because it's the most dangerous thing I did in the entire project, and I did it <em>on purpose, with a safety net you can't see in the transcript.</em></p>
+<p>Telling an AI "don't let the security gates stop you" is exactly the kind of instruction behind the horror stories you may have read — the coding agent that deleted a company's production database, or wiped out customer data, while "just trying to finish the task." Those weren't the AI being evil. They were people handing an autonomous agent broad permissions and then turning their back on it. The guardrails exist for a reason, and waving them away is how the disasters happen.</p>
+<p>I did it anyway, but only because of two things that aren't optional. First, I do this for a living — I'm a security professional, and I know these tools well enough to reason about how they can go wrong. Second, and more importantly, <strong>I was running everything inside a disposable, locked-down environment</strong> — a sandbox I could throw away — not on my real laptop with access to my real files and accounts. The "don't stop for security" instruction was scoped to a blast radius I had already contained.</p>
+<p>In my case, there were three concrete risks I was actually managing:</p>
+<ol>
+<li><strong>A poisoned software package (a "supply chain" attack).</strong> To build the tool, Claude downloads code libraries from the internet. One of them could contain malicious code hidden inside it — and it would run on my machine as part of the build.</li>
+<li><strong>A booby-trapped image.</strong> The tool downloads photos for the test corpus. An image file can be crafted to exploit a bug in the software that opens it, and quietly run the attacker's code (an "injection" or "remote code execution" attack).</li>
+<li><strong>Misuse of my GitHub credentials.</strong> To create the repository and push code, Claude had access to a GitHub access token. A token like that can do a <em>lot</em> of damage if it's misused. What the tutorial doesn't show — because it happened by hand, outside the chat — is that <strong>right after the blurscan repository was created, I manually rotated that credential so it only had permission to touch the blurscan repository and nothing else in my account.</strong> That one manual step is the difference between "the agent can fiddle with one throwaway repo" and "the agent holds the keys to everything I have on GitHub."</li>
+</ol>
+<p>The takeaway is not "be as cavalier as I was." If you know exactly what you're doing — disposable environment, scoped-down credentials, eyes on the blast radius — then loosening the guardrails <em>can</em> be safe. But the general rule, the one I'd actually want you to leave with, is the opposite: <strong>do not give Claude, or any coding agent, carte-blanche permissions.</strong> Keep the gates up unless you can explain, out loud, precisely why it's safe to lower a specific one.</p>
+<p>Then I went to bed. In the morning, I checked in:</p>
+<blockquote>
+<p><em>status?</em></p>
+</blockquote>
+<p><strong>It had accomplished nothing.</strong> For roughly <em>eight hours</em>, an automated timer had dutifully woken up about eight times to continue the work — and every single time, it woke up in a fresh, empty environment with no copy of the project, no tools installed, and no permission to do anything. So it did nothing, quietly, eight times in a row, without raising an alarm. Eight hours of wall-clock time, zero work done.</p>
+<p>When I sat back down and let the live session resume, it tore through the <em>remaining ten tasks plus a security cleanup in under an hour.</em></p>
+<p>The lesson is not "AI is bad." The lesson is the oldest one in automation, and it applies to you the moment you try to schedule <em>any</em> AI task to run unattended: <strong>never trust an unattended loop you haven't watched complete one real cycle.</strong> One test run before walking away would have caught it in two minutes. I didn't do that test run. That's a human mistake, not a robot one, and it's the most human thing in this whole story.</p>
+<hr>
+<h2>Then I asked it to analyze its own build</h2>
+<p>Once the tool was done and a final security pass had cleaned up two real vulnerabilities, I did the thing that turned this from "Claude built a tool" into "here's a tutorial." I had Claude read back through the complete logs of its own work and write me an analysis. That's the <code>prompt-analysis</code> folder in the repository, and it's honestly my favorite artifact of the whole project.</p>
+<blockquote>
+<p><em>analyze all of the prompts and responses used for this project, and if you can, from session logs, calculate the number of tokens used, write this all in a report.</em></p>
+</blockquote>
+<p>It produced two reports. The first is a complete, receipts-attached accounting of the build. The second is a retrospective — what worked, what didn't, and how we'd do it cheaper and faster next time. A few of the numbers, because they make the abstract concrete:</p>
+<p><strong>What it cost.</strong> Roughly <strong>$120</strong> in AI usage to build the entire tool — but that's the "if you paid per use" list price, not a bill I actually got. I'm on a Claude Max subscription ($100/month), which covers this kind of work, so the real out-of-pocket cost to me was a flat monthly fee I was already paying. I'm calling out the $120 because it's the honest measure of how much computing this took; what you'd <em>pay</em> depends entirely on your plan. A regular $20/month Claude subscription would have built the very same tool — it would just have taken longer, because the cheaper plan runs into its usage limits sooner (Claude meters usage on rolling 5-hour, weekly, and monthly windows), so you'd hit a "come back later" wall a few times and resume. Either way, nobody handed me a $120 invoice. Here's the part that taught <em>me</em> something: the big cost wasn't the AI writing code. It was the AI <em>re-reading the entire growing conversation</em> every single time it took another step — about 700 steps in one long session. Imagine being asked to re-read the whole book from page one before writing each new sentence. There's a discount for re-reading (the system caches it), but at 700 repetitions even the discount adds up. That re-reading was about <strong>$83 of the $120</strong>; the actual code-writing was only about <strong>$23</strong>.</p>
+<p><strong>The honest time accounting.</strong> The tool took about eleven hours of calendar time from first prompt to finished — but <strong>eight of those hours were the dead overnight gap where nothing happened.</strong> Strip that out and the <em>productive</em> time was under three hours. The AI's hands-on building time was about <strong>two and a half hours</strong> — which landed <em>under</em> its own low-end estimate from the design document. Against the human estimate of a week and a half to two weeks of full-time work, that's somewhere around a <strong>16-to-22-times reduction in effort.</strong></p>
+<p><strong>What we'd do differently.</strong> The retrospective is blunt about the inefficiencies, and they're all in the <em>orchestration</em>, not the work:</p>
+<ul>
+<li>The overnight failure came from arming the wrong kind of timer — one that started fresh each time instead of continuing the live session. The fix is to match the runner to the plan and to smoke-test it once before trusting it.</li>
+<li>The $83 of re-reading could drop to maybe $8–12 by having a thin "manager" hand each task to a focused "worker" with only the context that task needs — instead of one session dragging the entire history behind it forever.</li>
+<li>The work was done strictly one-at-a-time, but many of the tasks didn't depend on each other and could have run in parallel, cutting the build time further.</li>
+</ul>
+<p>None of those are flaws in the <em>tool that got built</em>. The tool is correct, tested, and gated. They're flaws in how I <em>drove</em> the build — and the fact that the AI could clearly diagnose its own inefficiencies, in writing, with cost estimates attached, is itself a small marvel.</p>
+<hr>
+<h2>Who actually owns this — and why it's free for anyone</h2>
+<p>There's a question lurking under this whole post: if Claude wrote the program, who <em>owns</em> it?</p>
+<p>I'm not a lawyer and this isn't legal advice, but here's the reasoning I went with. The way copyright law is currently being interpreted, a work generally needs a <em>human</em> author to be protected. In the United States, the Copyright Office and the courts have repeatedly taken the position that material generated by a machine — without enough genuinely human creative authorship in the actual expression — isn't an original work eligible for copyright at all. And in this project, the parts copyright would normally cover — the design and the implementation, the actual code — were created by Claude, not by me. I made decisions and set direction, but I didn't write the program.</p>
+<p>I should be clear about where I'm standing when I say that. I'm Canadian; I live and work under Canadian jurisdiction, and as far as I'm aware our courts haven't squarely decided the machine-authorship question yet — so I'm reasoning by analogy from the way it's been handled in the U.S. and from the general principle in Canadian copyright law that protection flows from human skill and judgment. It's entirely possible a Canadian court lands somewhere different down the road. I'm not trying to state settled law; I'm explaining the call I made with the information available today, and erring toward openness rather than claiming an ownership I'm not sure I have.</p>
+<p>So rather than stamp a restrictive copyright notice on something that, under the prevailing legal opinion, probably isn't mine to restrict in the first place, I released blurscan under the <strong><a href="https://opensource.org/license/mit">MIT license</a></strong> — about the most permissive license there is. It says, in effect: take it, use it, change it, build on it, sell it, no strings attached. That felt like the honest match for how it was actually made.</p>
+<p>It's worth contrasting that with <a href="https://parentsguidetoai.ca">the parents' guide on the main site</a>, and the content on my blog, which carries a more protective Creative Commons license. The difference isn't arbitrary: I <em>wrote</em> the guide — those words and that structure are human work — so it's mine to license carefully. This tool isn't mine in the same way. A machine made it, current law says that probably means nobody holds copyright over it, and the license I chose reflects that reality instead of papering over it.</p>
+<hr>
+<h2>What this means for you (yes, even if you'll never write code)</h2>
+<p>I didn't put you through all of that to turn you into a programmer. I put you through it because <strong>this is the most honest, detailed look I can give you at what "AI builds things now" actually means</strong> — and your kids are growing up inside it.</p>
+<p>Here's what I take away from it, and what I'd want you to:</p>
+<ul>
+<li>
+<p><strong>The headline is real, and the asterisks are real.</strong> A tool that would have taken a skilled person a week and a half got built in an evening of actual work. <em>And</em> it required a clear design, human judgment at the forks, automated checks the AI couldn't bypass, and one embarrassing overnight failure that no demo would ever show you. Both things are true at once. Be suspicious of anyone who only tells you one of them.</p>
+</li>
+<li>
+<p><strong>The skill that mattered wasn't coding. It was deciding.</strong> Every consequential moment in this build — what the tool should do, how to handle the blur it couldn't separate, when not to trust the automation — was a <em>judgment call</em>, not a technical one. The AI did the typing. I did the deciding. That's the skill your kids need, and it's a skill you already have.</p>
+</li>
+<li>
+<p><strong>Make the machine prove it, don't take its word.</strong> The single best decision I made was requiring an independent, automated check before any of the AI's work counted as "done." This generalizes far beyond code: when an AI gives your kid an answer, or gives you one, the right instinct is <em>"show me how you know,"</em> not <em>"sounds confident, must be right."</em> We've talked about that confidence-without-correctness problem all through this series. Building software is just one more place it shows up.</p>
+</li>
+<li>
+<p><strong>Unattended automation needs a babysitter exactly once.</strong> If you ever set an AI to do something on a schedule, watch it complete one full cycle before you trust it overnight. I didn't, and it cost me a night of nothing.</p>
+</li>
+</ul>
+<p>The tools are extraordinary and they are not magic. The closer you look, the more both halves of that sentence turn out to be true.</p>
+<hr>
+<p><strong>The short version:</strong></p>
+<ul>
+<li>Claude built a real, working photo-blur tool — design, code, tests, and all — from a single sentence I gave it and the handful of decisions I made along the way. I didn't write a line of it. It came together in about three hours of actual work, against a human estimate of a week and a half.</li>
+<li>Because a machine wrote it, current copyright law suggests it isn't anyone's to lock down — so it's released under the permissive MIT license, free for anyone to use or build on.</li>
+<li>The method: start with one sentence and <em>ask the AI to interview you</em>; turn the answers into a written plan; break the plan into small tasks; let the AI build them one at a time behind automated checks it can't skip; and stay the human for the decisions that change what gets built.</li>
+<li>The most important rule: <strong>gate the AI's output on a check it doesn't control.</strong> Never take "it works" on the AI's own say-so.</li>
+<li>That $120 is the "if you paid per use" list price, and most of it was the AI re-reading its own growing history, not writing code. I didn't actually pay it that way: I'm on a Claude Max subscription ($100/month) that covers this kind of work. A regular $20/month Claude subscription would have built the exact same tool — it just would have taken longer, because the cheaper plan hits its usage limits sooner (Claude meters use on rolling 5-hour, weekly, and monthly windows), so you'd pause and resume more.</li>
+<li>It failed in exactly one place: I left it running overnight on an untested automated timer, and it spent eight hours accomplishing nothing without noticing. Watch any unattended loop complete one real cycle before trusting it.</li>
+<li>The skill that carried the whole thing wasn't programming. It was human judgment — knowing what to build and when not to trust the machine. You already have that skill.</li>
+</ul>
+<hr>
+<p><strong>See the whole thing for yourself:</strong> the <a href="https://github.com/ygjb/blurscan">blurscan source code is on GitHub</a>, including the full design document, every numbered task, and the <code>prompt-analysis</code> folder where Claude analyzed its own build — every prompt I typed and every dollar it cost.</p>
+<p><strong>Try it yourself:</strong> next time you have a small, real, annoying task — sorting files, drafting a checklist, planning something with a lot of moving parts — open an AI tool and start with <em>"Ask me questions to refine this before you do anything."</em> Then watch what it asks. The questions it raises are often more useful than the answer you thought you wanted.</p>
+      </div>
+
+      <aside class="mt-5" aria-label="About the author">
+        <h2 class="h6 text-secondary text-uppercase ls-wide mb-3">About the author</h2><div class="author-bio-card">
+  <div class="author-bio-card-header">
+    <div class="author-bio-avatar" aria-hidden="true">
+      <i class="bi bi-person-fill"></i>
+    </div>
+    <div>
+      <a class="author-bio-name" href="https://blog.parentsguidetoai.ca/author/yvan-boily.html">Yvan Boily</a>      <div class="author-bio-location">
+        <i class="bi bi-geo-alt me-1"></i>Vancouver, BC
+      </div>    </div>
+  </div>  <p class="author-bio-text">Yvan Boily is a technology professional and parent based in Vancouver, BC. He created A Parent's Guide to AI to help families understand and navigate artificial intelligence with confidence — not from theory, but from experience.</p>  <div class="author-bio-social">    <a href="https://parentsguidetoai.ca" target="_blank" rel="noopener">
+      <i class="bi bi-globe"></i>Website
+    </a>  </div></div>      </aside>      <aside id="comments" class="mt-5">
+<h2 class="h6 text-secondary text-uppercase ls-wide mb-3">Comments</h2>
+<div class="giscus"></div>
+
+<script>
+(function () {
+  // Read whatever theme the anti-flash script already applied
+  var theme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+
+  // Build and inject the Giscus client script
+  var s = document.createElement('script');
+  s.src = 'https://giscus.app/client.js';
+  s.setAttribute('data-repo',               'ygjb/parents-guide-to-ai-blog');
+  s.setAttribute('data-repo-id',            'R_kgDOS6G1XQ');
+  s.setAttribute('data-category',           'Announcements');
+  s.setAttribute('data-category-id',        'DIC_kwDOS6G1Xc4C_J4G');
+  s.setAttribute('data-mapping',            'title');
+  s.setAttribute('data-strict',             '1');
+  s.setAttribute('data-reactions-enabled',  '1');
+  s.setAttribute('data-emit-metadata',      '0');
+  s.setAttribute('data-input-position',     'top');
+  s.setAttribute('data-theme',              theme);
+  s.setAttribute('data-lang',              'en');
+  s.setAttribute('data-loading',           'lazy');
+  s.setAttribute('crossorigin',            'anonymous');
+  s.async = true;
+  document.body.appendChild(s);
+
+  // Keep Giscus in sync when the user clicks the dark/light toggle
+  var toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      // Wait a tick for base.html's apply() to update data-bs-theme first
+      setTimeout(function () {
+        var newTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+        var frame = document.querySelector('iframe.giscus-frame');
+        if (frame) {
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme: newTheme } } },
+            'https://giscus.app'
+          );
+        }
+      }, 50);
+    });
+  }
+})();
+</script>      </aside>
+      <nav class="article-nav" aria-label="Article navigation">      </nav>
+
+      <div class="mt-4 d-flex flex-wrap align-items-center justify-content-between gap-3">
+        <a href="https://blog.parentsguidetoai.ca/" class="text-decoration-none small">
+          <i class="bi bi-arrow-left me-1"></i>All posts
+        </a>
+        <div class="d-inline-flex flex-wrap gap-3">
+          <a href="https://www.reddit.com/r/parentsguidetoai/" target="_blank" rel="noopener"
+             class="text-decoration-none small d-inline-flex align-items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="currentColor" aria-hidden="true" class="text-danger">
+              <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
+            </svg>
+            Join the community on Reddit
+          </a>
+          <a href="https://www.facebook.com/groups/parentsguidetoai" target="_blank" rel="noopener"
+             class="text-decoration-none small d-inline-flex align-items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                 fill="currentColor" aria-hidden="true" class="text-primary">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Join the community on Facebook
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+        <div>
+          <span class="fw-semibold">A Parent's Guide to AI</span>
+          <span class="ms-2 opacity-75">— Try It Yourself series</span>
+        </div>
+        <div class="opacity-75 d-flex flex-wrap align-items-center gap-3">
+          <span>Companion to <a href="https://parentsguidetoai.ca">parentsguidetoai.ca</a></span>
+          <span><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></span>
+          <span><a href="https://blog.parentsguidetoai.ca/pages/privacy-policy.html">Privacy Policy</a></span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    (function () {
+      var html  = document.documentElement;
+      var btn   = document.getElementById('theme-toggle');
+      var iconD = btn.querySelector('.theme-icon-dark');
+      var iconL = btn.querySelector('.theme-icon-light');
+
+      function apply(dark) {
+        html.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
+        iconD.style.display = dark ? 'none' : '';
+        iconL.style.display = dark ? '' : 'none';
+      }
+
+      function propagateLinks() {
+        var dark = html.getAttribute('data-bs-theme') === 'dark';
+        document.querySelectorAll('a[href]').forEach(function (a) {
+          var href = a.getAttribute('href');
+          // Absolute links to either domain, or root-relative links (local dev with SITEURL="")
+          if (/^https?:\/\/(blog\.)?parentsguidetoai\.ca/i.test(href) || /^\/(?!\/)/.test(href)) {
+            var base = href.split('#')[0];
+            if (base) { // skip pure in-page anchors like href="#section"
+              a.setAttribute('href', dark ? base + '#dark' : base);
+            }
+          }
+        });
+      }
+
+      apply(html.getAttribute('data-bs-theme') === 'dark');
+      propagateLinks();
+
+      btn.addEventListener('click', function () {
+        var goingDark = html.getAttribute('data-bs-theme') !== 'dark';
+        apply(goingDark);
+        history.replaceState(null, '', window.location.pathname + window.location.search + (goingDark ? '#dark' : ''));
+        propagateLinks();
+      });
+    })();
+  </script>
+
+</body>
+</html>
