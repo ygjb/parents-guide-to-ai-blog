@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="Pelican">
   <link rel="icon" type="image/png" href="https://blog.parentsguidetoai.ca/favicon.png">
-  <link rel="apple-touch-icon" href="https://blog.parentsguidetoai.ca/favicon.png">
+  <link rel="apple-touch-icon" href="https://blog.parentsguidetoai.ca/apple-touch-icon.png">
 
   <script>
     (function(){
-      if (window.location.hash === '#dark') {
-        document.documentElement.setAttribute('data-bs-theme', 'dark');
-      }
-      // else stays 'light' as set on <html data-bs-theme="light">
+      var h = window.location.hash;
+      var dark = (h === '#dark') ||
+                 (h !== '#light' && window.matchMedia &&
+                  window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
     })();
   </script>
 
@@ -30,9 +31,8 @@
 <meta name="image" property="og:image" content="https://blog.parentsguidetoai.ca/images/social/tag-bc-resources.png">
 <meta name="twitter:image" content="https://blog.parentsguidetoai.ca/images/social/tag-bc-resources.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="https://blog.parentsguidetoai.ca/theme/fonts/figtree-latin.woff2">
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -43,7 +43,7 @@
 <body>
   <a class="visually-hidden-focusable" href="#main-content">Skip to main content</a>
 
-  <nav class="navbar navbar-expand-lg sticky-top" id="site-nav" aria-label="Site navigation">
+  <nav class="navbar navbar-expand-xxl sticky-top" id="site-nav" aria-label="Site navigation">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-2" href="https://blog.parentsguidetoai.ca/">
         <i class="bi bi-robot fs-5"></i>
@@ -57,7 +57,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navMain">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">            <li class="nav-item">
+        <ul class="navbar-nav ms-xxl-auto align-items-xxl-center gap-xxl-1">            <li class="nav-item">
               <a class="nav-link"
                  href="https://blog.parentsguidetoai.ca/category/general.html">General</a>
             </li>            <li class="nav-item">
@@ -77,7 +77,7 @@
           </li>          <li class="nav-item">
             <a class="nav-link" href="/pages/how-to-comment.html">Comments & Feedback</a>
           </li>
-          <li class="nav-item ms-lg-2">
+          <li class="nav-item ms-xxl-2 nav-util">
             <a class="btn btn-sm btn-outline-primary"
                href="https://parentsguidetoai.ca"
                target="_blank" rel="noopener">
@@ -85,7 +85,7 @@
             </a>
           </li>
 
-          <li class="nav-item ms-lg-1">
+          <li class="nav-item ms-xxl-1">
             <button class="btn btn-sm btn-outline-secondary px-2"
                     id="theme-toggle" aria-label="Toggle colour scheme">
               <i class="bi bi-moon-stars theme-icon-dark"></i>
@@ -145,6 +145,8 @@
       var btn   = document.getElementById('theme-toggle');
       var iconD = btn.querySelector('.theme-icon-dark');
       var iconL = btn.querySelector('.theme-icon-light');
+      var mq    = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+      var chosen = (window.location.hash === '#dark') || (window.location.hash === '#light');
 
       function apply(dark) {
         html.setAttribute('data-bs-theme', dark ? 'dark' : 'light');
@@ -153,15 +155,12 @@
       }
 
       function propagateLinks() {
-        var dark = html.getAttribute('data-bs-theme') === 'dark';
+        var tag = html.getAttribute('data-bs-theme') === 'dark' ? '#dark' : '#light';
         document.querySelectorAll('a[href]').forEach(function (a) {
           var href = a.getAttribute('href');
-          // Absolute links to either domain, or root-relative links (local dev with SITEURL="")
           if (/^https?:\/\/(blog\.)?parentsguidetoai\.ca/i.test(href) || /^\/(?!\/)/.test(href)) {
             var base = href.split('#')[0];
-            if (base) { // skip pure in-page anchors like href="#section"
-              a.setAttribute('href', dark ? base + '#dark' : base);
-            }
+            if (base) { a.setAttribute('href', base + tag); }
           }
         });
       }
@@ -171,10 +170,16 @@
 
       btn.addEventListener('click', function () {
         var goingDark = html.getAttribute('data-bs-theme') !== 'dark';
+        chosen = true;
         apply(goingDark);
-        history.replaceState(null, '', window.location.pathname + window.location.search + (goingDark ? '#dark' : ''));
+        history.replaceState(null, '', window.location.pathname + window.location.search + (goingDark ? '#dark' : '#light'));
         propagateLinks();
       });
+
+      if (mq) {
+        var onChange = function (e) { if (!chosen) { apply(e.matches); propagateLinks(); } };
+        mq.addEventListener ? mq.addEventListener('change', onChange) : mq.addListener(onChange);
+      }
     })();
   </script>
 
